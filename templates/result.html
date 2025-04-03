@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>Result</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    .correct { color: green; font-weight: bold; }
+    .incorrect { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>🎉 Quiz Completed!</h1>
+  <p>Your score: {{ score }}/{{ total }}</p>
+
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Question</th>
+      <th>Your Answer</th>
+      <th>Correct?</th>
+      <th>Correct Answer</th>
+    </tr>
+    {% for a in answers %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ a.question }}</td>
+      <td>{{ a.your_answer }}</td>
+      <td class="{{ 'correct' if a.is_correct else 'incorrect' }}">
+        {{ '✅' if a.is_correct else '❌' }}
+      </td>
+      <td>{{ a.correct_answer }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <br>
+  <a href="/">Restart Quiz</a>
+</body>
+</html>

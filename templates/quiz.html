@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <title>Jakarta EE Quiz</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .container { max-width: 700px; margin: auto; }
+    button { margin-top: 15px; padding: 10px 20px; }
+    .feedback { font-weight: bold; margin-top: 20px; }
+    .correct { color: green; }
+    .incorrect { color: red; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Question {{ qnum }}/{{ total }}</h2>
+    <form method="POST">
+      <p><strong>{{ q.question }}</strong></p>
+      {% for choice in q.choices %}
+        <p><label><input type="radio" name="choice" value="{{ loop.index0 }}" required> {{ choice }}</label></p>
+      {% endfor %}
+      <button type="submit">Submit</button>
+    </form>
+
+    {% if feedback %}
+      <div class="feedback {{ 'correct' if correct else 'incorrect' }}">
+        {{ feedback }}
+      </div>
+      <form method="GET">
+        <button type="submit">Next</button>
+      </form>
+    {% endif %}
+  </div>
+</body>
+</html>
